@@ -846,7 +846,7 @@ def worker():
                          ('Performance', 'performance', performance_selection.value)]
 
                     if input_image_checkbox:
-                        d.append('Current tab', 'current_tab', current_tab)
+                        d.append(('Current tab', 'current_tab', current_tab))
 
 
                     if performance_selection.steps() != steps:
