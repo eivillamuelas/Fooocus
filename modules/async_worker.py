@@ -52,6 +52,11 @@ def worker():
     from modules.flags import Performance
     from modules.meta_parser import get_metadata_parser, MetadataScheme
 
+    import os
+    import numpy as np
+    from PIL import Image
+    from datetime import datetime
+
     pid = os.getpid()
     print(f'Started worker with PID {pid}')
 
@@ -67,6 +72,25 @@ def worker():
     def progressbar(async_task, number, text):
         print(f'[Fooocus] {text}')
         async_task.yields.append(['preview', (number, text, None)])
+
+    def are_images_equal(image1_path, image2):
+        image1 = Image.open(image1_path)
+        array1 = np.array(image1)
+        array2 = np.array(image2)
+        return np.array_equal(array1, array2)
+    
+    def check_duplicate_images(image, directorio_imagenes):
+        if not any(f.endswith('.png') for f in os.listdir(directorio)):
+            image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png")
+            return True
+        for filename in os.listdir(directorio_imagenes):
+            if filename.endswith(".png") or filename.endswith(".jpg"):
+                filepath = os.path.join(directorio_imagenes, filename)
+                if are_images_equal(filepath, image) == False:
+                  image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png")
+                  return True
+                else:
+                  return False
 
     def yield_result(async_task, imgs, do_not_show_finished_images=False):
         if not isinstance(imgs, list):
@@ -152,6 +176,12 @@ def worker():
         current_tab = args.pop()
         uov_method = args.pop()
         uov_input_image = args.pop()
+        uov_input_image_path;
+        if uov_input_image is not None:
+            Image.fromarray(np.uint8(uov_input_image)).save('imagen.png') 
+            imagen_dada = Image.open("aaa.png")
+            directorio_imagenes = "outputs/inputs"
+            uov_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
         outpaint_selections = args.pop()
         inpaint_input_image = args.pop()
         inpaint_additional_prompt = args.pop()
