@@ -845,6 +845,32 @@ def worker():
                          ('Styles', 'styles', str(raw_style_selections)),
                          ('Performance', 'performance', performance_selection.value)]
 
+                    if input_image_checkbox:
+                        d.append('Current tab', 'current_tab', current_tab)
+
+
+                    if performance_selection.steps() != steps:
+                        d.append(('Steps', 'steps', steps))
+                        if current_tab == 'uov':
+                          d.append(('Uov Method', 'uov_method', uov_method))
+                          d.append(('Uov Input Image', 'uov_input_image', uov_input_image))
+                        if current_tab == 'inpaint':
+                          d.append(('Inpaint Image', 'inpaint_image', inpaint_image))
+                        if current_tab == 'ip':
+                          if 'cn' in goals:
+                            for task in cn_tasks[flags.cn_canny]:
+                              cn_img, cn_stop, cn_weight = task
+                              d.append(('Task', 'task', "canny"))
+                              d.append(('cn_img', 'cn_img', cn_img))
+                              d.append(('cn_stop', 'cn_stop', cn_stop))
+                              d.append(('cn_weight', 'cn_weight', cn_weight))
+                            for task in cn_tasks[flags.cn_ip]:
+                              cn_img, cn_stop, cn_weight = task
+                              d.append(('Task', 'task', "ip"))
+                              d.append(('cn_img', 'cn_img', cn_img))
+                              d.append(('cn_stop', 'cn_stop', cn_stop))
+                              d.append(('cn_weight', 'cn_weight', cn_weight))
+
                     if performance_selection.steps() != steps:
                         d.append(('Steps', 'steps', steps))
 
