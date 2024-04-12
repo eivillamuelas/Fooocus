@@ -176,7 +176,7 @@ def worker():
         current_tab = args.pop()
         uov_method = args.pop()
         uov_input_image = args.pop()
-        uov_input_image_path;
+        uov_input_image_path = "";
         if uov_input_image is not None:
             imagen_dada = Image.fromarray(np.uint8(uov_input_image))
             directorio_imagenes = "outputs/inputs"
