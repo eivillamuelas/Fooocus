@@ -80,17 +80,17 @@ def worker():
         return np.array_equal(array1, array2)
     
     def check_duplicate_images(image, directorio_imagenes):
-        if not any(f.endswith('.png') for f in os.listdir(directorio)):
+        if not any(f.endswith('.png') for f in os.listdir(directorio_imagenes)):
             image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png")
-            return True
+            return directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
         for filename in os.listdir(directorio_imagenes):
             if filename.endswith(".png") or filename.endswith(".jpg"):
                 filepath = os.path.join(directorio_imagenes, filename)
                 if are_images_equal(filepath, image) == False:
                   image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png")
-                  return True
+                  return directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
                 else:
-                  return False
+                  return filepath
 
     def yield_result(async_task, imgs, do_not_show_finished_images=False):
         if not isinstance(imgs, list):
@@ -178,8 +178,7 @@ def worker():
         uov_input_image = args.pop()
         uov_input_image_path;
         if uov_input_image is not None:
-            Image.fromarray(np.uint8(uov_input_image)).save('imagen.png') 
-            imagen_dada = Image.open("aaa.png")
+            imagen_dada = Image.fromarray(np.uint8(uov_input_image))
             directorio_imagenes = "outputs/inputs"
             uov_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
         outpaint_selections = args.pop()
