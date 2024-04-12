@@ -876,13 +876,13 @@ def worker():
 
                     if input_image_checkbox:
                         d.append(('Current tab', 'current_tab', current_tab))
-
+                        if current_tab == 'uov':
+                            d.append(('Uov Method', 'uov_method', uov_method))
+                            d.append(('Uov Input Image', 'uov_input_image', uov_input_image_path))
 
                     if performance_selection.steps() != steps:
                         d.append(('Steps', 'steps', steps))
-                        if current_tab == 'uov':
-                          d.append(('Uov Method', 'uov_method', uov_method))
-                          d.append(('Uov Input Image', 'uov_input_image', uov_input_image))
+                        
                         if current_tab == 'inpaint':
                           d.append(('Inpaint Image', 'inpaint_image', inpaint_image))
                         if current_tab == 'ip':
