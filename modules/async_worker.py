@@ -889,8 +889,8 @@ def worker():
                         if current_tab == 'inpaint':
                             if len(outpaint_selections) > 0:
                                 d.append(('Outpaint Selections', 'outpaint_selections', outpaint_selections))
-                                d.append(('Inpaint Image', 'inpaint_input_image_path', inpaint_input_image_path))
-                                d.append(('Inpaint Image Mask', 'inpaint_input_image_mask', inpaint_input_image_mask))
+                            d.append(('Inpaint Image', 'inpaint_input_image_path', inpaint_input_image_path))
+                            d.append(('Inpaint Image Mask', 'inpaint_input_image_mask', inpaint_input_image_mask))
                             
 
                     if performance_selection.steps() != steps:
