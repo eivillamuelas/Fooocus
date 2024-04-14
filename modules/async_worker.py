@@ -911,7 +911,7 @@ def worker():
 
                     if input_image_checkbox:
                         d.append(('Current tab', 'current_tab', current_tab))
-                        if current_tab == 'uov' and uov_method != flags.disabled:
+                        if current_tab == 'uov' and uov_method != "disabled":
                             if overwrite_vary_strength > 0:
                                 d.append(('Vary strength', 'overwrite_vary_strength', overwrite_vary_strength))
                             else:
