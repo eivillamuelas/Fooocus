@@ -186,6 +186,7 @@ def worker():
         inpaint_input_image_path = ""
         inpaint_input_image_mask = ""
         if inpaint_input_image is not None and current_tab == 'inpaint':
+            print(inpaint_input_image['image'])
             imagen_dada_inpaint = Image.fromarray(np.uint8(inpaint_input_image['image']))
             inpaint_input_image_path = check_duplicate_images(imagen_dada_inpaint, directorio_imagenes)
             imagen_dada_mask = Image.fromarray(np.uint8(inpaint_input_image['mask'][:, :, 0]))
