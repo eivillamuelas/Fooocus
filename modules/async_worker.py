@@ -911,7 +911,7 @@ def worker():
 
                     if input_image_checkbox:
                         d.append(('Current tab', 'current_tab', current_tab))
-                        if current_tab == 'uov':
+                        if current_tab == 'uov' and uov_method != flags.disabled:
                             if overwrite_vary_strength > 0:
                                 d.append(('Vary strength', 'overwrite_vary_strength', overwrite_vary_strength))
                             else:
@@ -924,27 +924,7 @@ def worker():
                             d.append(('Inpaint Image Mask', 'inpaint_input_image_mask', inpaint_input_image_mask))
                         if current_tab == 'ip':
                             d.append(('Image Prompt', 'image_prompt', image_prompt))
-                            
 
-                    if performance_selection.steps() != steps:
-                        d.append(('Steps', 'steps', steps))
-                        
-                        if current_tab == 'inpaint':
-                          d.append(('Inpaint Image', 'inpaint_image', inpaint_image))
-                        if current_tab == 'ip':
-                          if 'cn' in goals:
-                            for task in cn_tasks[flags.cn_canny]:
-                              cn_img, cn_stop, cn_weight = task
-                              d.append(('Task', 'task', "canny"))
-                              d.append(('cn_img', 'cn_img', cn_img))
-                              d.append(('cn_stop', 'cn_stop', cn_stop))
-                              d.append(('cn_weight', 'cn_weight', cn_weight))
-                            for task in cn_tasks[flags.cn_ip]:
-                              cn_img, cn_stop, cn_weight = task
-                              d.append(('Task', 'task', "ip"))
-                              d.append(('cn_img', 'cn_img', cn_img))
-                              d.append(('cn_stop', 'cn_stop', cn_stop))
-                              d.append(('cn_weight', 'cn_weight', cn_weight))
 
                     if performance_selection.steps() != steps:
                         d.append(('Steps', 'steps', steps))
