@@ -79,16 +79,16 @@ def worker():
         array2 = np.array(image2)
         return np.array_equal(array1, array2)
     
-    def check_duplicate_images(image, directorio_imagenes):
+    def check_duplicate_images(image, directorio_imagenes, name):
         if not any(f.endswith('.png') for f in os.listdir(directorio_imagenes)):
-            image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png")
-            return directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
+            image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + name + ".png")
+            return directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + name + ".png"
         for filename in os.listdir(directorio_imagenes):
             if filename.endswith(".png") or filename.endswith(".jpg"):
                 filepath = os.path.join(directorio_imagenes, filename)
                 if are_images_equal(filepath, image) == False:
-                  image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png")
-                  return directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".png"
+                  image.save(directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + name + ".png")
+                  return directorio_imagenes + "/input_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + name + ".png"
                 else:
                   return filepath
 
@@ -180,16 +180,16 @@ def worker():
         directorio_imagenes = "outputs/inputs"
         if uov_input_image is not None and current_tab == 'uov':
             imagen_dada = Image.fromarray(np.uint8(uov_input_image))
-            uov_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
+            uov_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes, "variation")
         outpaint_selections = args.pop()
         inpaint_input_image = args.pop()
         inpaint_input_image_path = ""
         inpaint_input_image_mask = ""
         if inpaint_input_image is not None and current_tab == 'inpaint':
             imagen_dada_inpaint = Image.fromarray(np.uint8(inpaint_input_image['image']))
-            inpaint_input_image_path = check_duplicate_images(imagen_dada_inpaint, directorio_imagenes)
+            inpaint_input_image_path = check_duplicate_images(imagen_dada_inpaint, directorio_imagenes, "inpaint")
             imagen_dada_mask = Image.fromarray(np.uint8(inpaint_input_image['mask'][:, :, 0]))
-            inpaint_input_image_mask = check_duplicate_images(imagen_dada_mask, directorio_imagenes)
+            inpaint_input_image_mask = check_duplicate_images(imagen_dada_mask, directorio_imagenes, "mask")
         inpaint_additional_prompt = args.pop()
         inpaint_mask_image_upload = args.pop()
 
