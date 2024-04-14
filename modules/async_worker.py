@@ -879,6 +879,9 @@ def worker():
                         if current_tab == 'uov':
                             d.append(('Uov Method', 'uov_method', uov_method))
                             d.append(('Uov Input Image', 'uov_input_image', uov_input_image_path))
+                        if current_tab == 'inpaint':
+                            if len(outpaint_selections) > 0:
+                                d.append(('Outpaint Selections', 'outpaint_selections', outpaint_selections))
 
                     if performance_selection.steps() != steps:
                         d.append(('Steps', 'steps', steps))
