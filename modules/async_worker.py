@@ -241,6 +241,7 @@ def worker():
             cn_type = args.pop()
             if cn_img is not None:
                 cn_tasks[cn_type].append([cn_img, cn_stop, cn_weight])
+        print(cn_tasks)
 
         outpaint_selections = [o.lower() for o in outpaint_selections]
         base_model_additional_loras = []
