@@ -912,7 +912,10 @@ def worker():
                     if input_image_checkbox:
                         d.append(('Current tab', 'current_tab', current_tab))
                         if current_tab == 'uov':
-                            d.append(('Uov Method', 'uov_method', uov_method))
+                            if overwrite_vary_strength > 0:
+                                d.append(('Vary strength', 'overwrite_vary_strength', overwrite_vary_strength))
+                            else:
+                                d.append(('Uov Method', 'uov_method', uov_method))
                             d.append(('Uov Input Image', 'uov_input_image', uov_input_image_path))
                         if current_tab == 'inpaint':
                             if len(outpaint_selections) > 0:
