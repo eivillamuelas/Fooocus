@@ -177,7 +177,7 @@ def worker():
         uov_method = args.pop()
         uov_input_image = args.pop()
         uov_input_image_path = "";
-        if uov_input_image is not None:
+        if uov_input_image is not None and current_tab == 'uov':
             imagen_dada = Image.fromarray(np.uint8(uov_input_image))
             directorio_imagenes = "outputs/inputs"
             uov_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
