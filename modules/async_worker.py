@@ -186,10 +186,10 @@ def worker():
         inpaint_input_image_path = ""
         inpaint_input_image_mask = ""
         if inpaint_input_image is not None and current_tab == 'inpaint':
-            imagen_dada = Image.fromarray(np.uint8(inpaint_input_image['image']))
-            inpaint_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
-            imagen_dada = Image.fromarray(np.uint8(inpaint_input_image['mask'][:, :, 0]))
-            inpaint_input_image_mask = check_duplicate_images(imagen_dada, directorio_imagenes)
+            imagen_dada_inpaint = Image.fromarray(np.uint8(inpaint_input_image['image']))
+            inpaint_input_image_path = check_duplicate_images(imagen_dada_inpaint, directorio_imagenes)
+            imagen_dada_mask = Image.fromarray(np.uint8(inpaint_input_image['mask'][:, :, 0]))
+            inpaint_input_image_mask = check_duplicate_images(imagen_dada_mask, directorio_imagenes)
         inpaint_additional_prompt = args.pop()
         inpaint_mask_image_upload = args.pop()
 
