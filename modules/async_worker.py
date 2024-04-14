@@ -246,22 +246,22 @@ def worker():
         image_prompt = []
         
         if len(cn_taks['ImagePrompt']) > 0:
-            for task in cn_taks['ImagePrompt']):
+            for task in cn_taks['ImagePrompt']:
                 x += 1
                 image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
         if len(cn_taks['PyraCanny']) > 0:
-            for task in cn_taks['PyraCanny']):
+            for task in cn_taks['PyraCanny']:
                 x += 1
                 image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
         if len(cn_taks['CPDS']) > 0:
-            for task in cn_taks['CPDS']):
+            for task in cn_taks['CPDS']:
                 x += 1
                 image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
         if len(cn_taks['FaceSwap']) > 0:
-            for task in cn_taks['FaceSwap']):
+            for task in cn_taks['FaceSwap']:
                 x += 1
                 image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
