@@ -241,7 +241,30 @@ def worker():
             cn_type = args.pop()
             if cn_img is not None:
                 cn_tasks[cn_type].append([cn_img, cn_stop, cn_weight])
-        print(cn_tasks)
+        x = 0
+
+        image_prompt = []
+        
+        if len(cn_taks['ImagePrompt']) > 0:
+            for task in cn_taks['ImagePrompt']):
+                x += 1
+                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                image_prompt.append([image_prompt_path, task[1], task[2])
+        if len(cn_taks['PyraCanny']) > 0:
+            for task in cn_taks['PyraCanny']):
+                x += 1
+                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                image_prompt.append([image_prompt_path, task[1], task[2])
+        if len(cn_taks['CPDS']) > 0:
+            for task in cn_taks['CPDS']):
+                x += 1
+                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                image_prompt.append([image_prompt_path, task[1], task[2])
+        if len(cn_taks['FaceSwap']) > 0:
+            for task in cn_taks['FaceSwap']):
+                x += 1
+                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                image_prompt.append([image_prompt_path, task[1], task[2])
 
         outpaint_selections = [o.lower() for o in outpaint_selections]
         base_model_additional_loras = []
@@ -892,6 +915,8 @@ def worker():
                                 d.append(('Outpaint Selections', 'outpaint_selections', outpaint_selections))
                             d.append(('Inpaint Image', 'inpaint_input_image_path', inpaint_input_image_path))
                             d.append(('Inpaint Image Mask', 'inpaint_input_image_mask', inpaint_input_image_mask))
+                        if current_tab == 'ip':
+                            d.append(('Image Prompt', 'image_prompt', image_prompt))
                             
 
                     if performance_selection.steps() != steps:
