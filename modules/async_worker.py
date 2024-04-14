@@ -177,12 +177,19 @@ def worker():
         uov_method = args.pop()
         uov_input_image = args.pop()
         uov_input_image_path = "";
+        directorio_imagenes = "outputs/inputs"
         if uov_input_image is not None and current_tab == 'uov':
             imagen_dada = Image.fromarray(np.uint8(uov_input_image))
-            directorio_imagenes = "outputs/inputs"
             uov_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
         outpaint_selections = args.pop()
         inpaint_input_image = args.pop()
+        inpaint_input_image_path = ""
+        inpaint_input_image_mask = ""
+        if inpaint_input_image is not None and current_tab == 'inpaint':
+            imagen_dada = Image.fromarray(np.uint8(inpaint_input_image['image']))
+            inpaint_input_image_path = check_duplicate_images(imagen_dada, directorio_imagenes)
+            imagen_dada = Image.fromarray(np.uint8(inpaint_input_image['mask'][:, :, 0]))
+            inpaint_input_image_mask = check_duplicate_images(imagen_dada, directorio_imagenes)
         inpaint_additional_prompt = args.pop()
         inpaint_mask_image_upload = args.pop()
 
@@ -882,6 +889,9 @@ def worker():
                         if current_tab == 'inpaint':
                             if len(outpaint_selections) > 0:
                                 d.append(('Outpaint Selections', 'outpaint_selections', outpaint_selections))
+                                d.append(('Inpaint Image', 'inpaint_input_image_path', inpaint_input_image_path))
+                                d.append(('Inpaint Image Mask', 'inpaint_input_image_mask', inpaint_input_image_mask))
+                            
 
                     if performance_selection.steps() != steps:
                         d.append(('Steps', 'steps', steps))
