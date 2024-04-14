@@ -248,22 +248,26 @@ def worker():
         if len(cn_tasks['ImagePrompt']) > 0:
             for task in cn_tasks['ImagePrompt']:
                 x += 1
-                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                imagen_dada = Image.fromarray(np.uint8(task[0]))
+                image_prompt_path = check_duplicate_images(imagen_dada, directorio_imagenes, "ip" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
         if len(cn_tasks['PyraCanny']) > 0:
             for task in cn_tasks['PyraCanny']:
                 x += 1
-                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                imagen_dada = Image.fromarray(np.uint8(task[0]))
+                image_prompt_path = check_duplicate_images(imagen_dada, directorio_imagenes, "canny" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
         if len(cn_tasks['CPDS']) > 0:
             for task in cn_tasks['CPDS']:
                 x += 1
-                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                imagen_dada = Image.fromarray(np.uint8(task[0]))
+                image_prompt_path = check_duplicate_images(imagen_dada, directorio_imagenes, "cpds" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
         if len(cn_tasks['FaceSwap']) > 0:
             for task in cn_tasks['FaceSwap']:
                 x += 1
-                image_prompt_path = check_duplicate_images(task[0], directorio_imagenes, "mask" + str(x))
+                imagen_dada = Image.fromarray(np.uint8(task[0]))
+                image_prompt_path = check_duplicate_images(imagen_dada, directorio_imagenes, "faceswap" + str(x))
                 image_prompt.append([image_prompt_path, task[1], task[2]])
 
         outpaint_selections = [o.lower() for o in outpaint_selections]
