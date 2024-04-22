@@ -257,6 +257,11 @@ with shared.gradio_root:
 
         with gr.Column(scale=1, visible=modules.config.default_advanced_checkbox) as advanced_column:
             with gr.Tab(label='Setting'):
+                if not args_manager.args.disable_preset_selection:
+                    preset_selection = gr.Radio(label='Preset',
+                                                choices=modules.config.available_presets,
+                                                value=args_manager.args.preset if args_manager.args.preset else "initial",
+                                                interactive=True)
                 
                 performance_selection = gr.Radio(label='Performance',
                                                  choices=flags.Performance.list(),
